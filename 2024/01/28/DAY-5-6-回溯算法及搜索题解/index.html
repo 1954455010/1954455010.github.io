@@ -20,19 +20,19 @@
     var CONFIG = {"hostname":"example.com","root":"/","scheme":"Pisces","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
   </script>
 
-  <meta name="description" content="（1.语法模板123456789 #include &lt;iostream&gt;using namespace    std;int main()&amp;#123;    int a &#x3D; 10;    cout &lt;&lt; &quot;a &#x3D;&quot; &lt;&lt; a &lt;&lt; endl;    system(&quot;pause&quot;);    return 0; &amp;">
+  <meta name="description" content="自然数的拆分问题    (搜索与回溯算法)题目描述任何一个大于 $1$ 的自然数 $n$，总可以拆分成若干个小于 $n$ 的自然数之和。现在给你一个自然数 $n$，要求你求出 $n$ 的拆分成一些数字的和。每个拆分后的序列中的数字从小到大排序。然后你需要输出这些序列，其中字典序小的序列需要优先输出。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DAY 1 C++学习01">
-<meta property="og:url" content="http://example.com/2024/01/22/DAY-1-C-%E5%AD%A6%E4%B9%A001/index.html">
+<meta property="og:title" content="DAY 5-6 回溯算法及搜索题解">
+<meta property="og:url" content="http://example.com/2024/01/28/DAY-5-6-%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E5%8F%8A%E6%90%9C%E7%B4%A2%E9%A2%98%E8%A7%A3/index.html">
 <meta property="og:site_name" content="胤的博客">
-<meta property="og:description" content="（1.语法模板123456789 #include &lt;iostream&gt;using namespace    std;int main()&amp;#123;    int a &#x3D; 10;    cout &lt;&lt; &quot;a &#x3D;&quot; &lt;&lt; a &lt;&lt; endl;    system(&quot;pause&quot;);    return 0; &amp;">
+<meta property="og:description" content="自然数的拆分问题    (搜索与回溯算法)题目描述任何一个大于 $1$ 的自然数 $n$，总可以拆分成若干个小于 $n$ 的自然数之和。现在给你一个自然数 $n$，要求你求出 $n$ 的拆分成一些数字的和。每个拆分后的序列中的数字从小到大排序。然后你需要输出这些序列，其中字典序小的序列需要优先输出。">
 <meta property="og:locale">
-<meta property="article:published_time" content="2024-01-22T00:52:48.000Z">
-<meta property="article:modified_time" content="2024-01-22T14:47:00.442Z">
+<meta property="article:published_time" content="2024-01-28T03:39:48.000Z">
+<meta property="article:modified_time" content="2024-01-28T06:32:56.692Z">
 <meta property="article:author" content="胤">
 <meta name="twitter:card" content="summary">
 
-<link rel="canonical" href="http://example.com/2024/01/22/DAY-1-C-%E5%AD%A6%E4%B9%A001/">
+<link rel="canonical" href="http://example.com/2024/01/28/DAY-5-6-%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E5%8F%8A%E6%90%9C%E7%B4%A2%E9%A2%98%E8%A7%A3/">
 
 
 <script id="page-configurations">
@@ -45,7 +45,7 @@
   };
 </script>
 
-  <title>DAY 1 C++学习01 | 胤的博客</title>
+  <title>DAY 5-6 回溯算法及搜索题解 | 胤的博客</title>
   
 
 
@@ -151,7 +151,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-Hans">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/22/DAY-1-C-%E5%AD%A6%E4%B9%A001/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2024/01/28/DAY-5-6-%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95%E5%8F%8A%E6%90%9C%E7%B4%A2%E9%A2%98%E8%A7%A3/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -164,7 +164,7 @@
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          DAY 1 C++学习01
+          DAY 5-6 回溯算法及搜索题解
         </h1>
 
         <div class="post-meta">
@@ -175,7 +175,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2024-01-22 08:52:48 / 修改时间：22:47:00" itemprop="dateCreated datePublished" datetime="2024-01-22T08:52:48+08:00">2024-01-22</time>
+              <time title="创建时间：2024-01-28 11:39:48 / 修改时间：14:32:56" itemprop="dateCreated datePublished" datetime="2024-01-28T11:39:48+08:00">2024-01-28</time>
             </span>
 
           
@@ -196,11 +196,8 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="（1-语法模板"><a href="#（1-语法模板" class="headerlink" title="（1.语法模板"></a>（1.语法模板</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"> #include &lt;iostream&gt;</span><br><span class="line">using namespace    std;</span><br><span class="line">int main()</span><br><span class="line">&#123;</span><br><span class="line">    int a = 10;</span><br><span class="line">    cout &lt;&lt; &quot;a =&quot; &lt;&lt; a &lt;&lt; endl;</span><br><span class="line">    system(&quot;pause&quot;);</span><br><span class="line">    return 0; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+        <h1 id="自然数的拆分问题-搜索与回溯算法"><a href="#自然数的拆分问题-搜索与回溯算法" class="headerlink" title="自然数的拆分问题    (搜索与回溯算法)"></a>自然数的拆分问题    (搜索与回溯算法)</h1><h2 id="题目描述"><a href="#题目描述" class="headerlink" title="题目描述"></a>题目描述</h2><p>任何一个大于 $1$ 的自然数 $n$，总可以拆分成若干个小于 $n$ 的自然数之和。现在给你一个自然数 $n$，要求你求出 $n$ 的拆分成一些数字的和。每个拆分后的序列中的数字从小到大排序。然后你需要输出这些序列，其中字典序小的序列需要优先输出。</p>
 
-<h2 id="（2-常量的定义"><a href="#（2-常量的定义" class="headerlink" title="（2.常量的定义"></a>（2.常量的定义</h2><h3 id="1-宏常量-define"><a href="#1-宏常量-define" class="headerlink" title="1.宏常量 #define"></a>1.宏常量 #define</h3><p><mark>定义在文件的上方</mark>，表示一个常量</p>
-<h2 id="2-修饰的变量const"><a href="#2-修饰的变量const" class="headerlink" title="2.修饰的变量const"></a>2.修饰的变量const</h2><p><mark>通常在变量定义前加关键字const</mark>，修饰该变量为常量，不可修改</p>
-<h2 id="（3-bool值（1字节）"><a href="#（3-bool值（1字节）" class="headerlink" title="（3.bool值（1字节）"></a>（3.bool值（1字节）</h2><h3 id="1-true-为真表示1"><a href="#1-true-为真表示1" class="headerlink" title="1.true 为真表示1"></a>1.true 为真表示1</h3><h3 id="2-false为假表示0"><a href="#2-false为假表示0" class="headerlink" title="2.false为假表示0"></a>2.false为假表示0</h3><h3 id="3-只要非0的值都表示1"><a href="#3-只要非0的值都表示1" class="headerlink" title="3.只要非0的值都表示1"></a>3.只要非0的值都表示1</h3><h2 id="4-其他语法似乎和c语言没有什么太大区别。"><a href="#4-其他语法似乎和c语言没有什么太大区别。" class="headerlink" title="(4.其他语法似乎和c语言没有什么太大区别。"></a>(4.其他语法似乎和c语言没有什么太大区别。</h2>
     </div>
 
     
@@ -215,12 +212,12 @@
         
     <div class="post-nav">
       <div class="post-nav-item">
-    <a href="/2023/11/10/C%E8%AF%AD%E8%A8%80%E5%AD%A6%E4%B9%A0-9-%EF%BC%88%E7%94%A8break%E5%92%8Ccontinue%E6%9D%A5%E8%B7%B3%E5%87%BA%E5%BE%AA%E7%8E%AF%EF%BC%89/" rel="prev" title="C语言学习 9 （用break和continue来跳出循环）">
-      <i class="fa fa-chevron-left"></i> C语言学习 9 （用break和continue来跳出循环）
+    <a href="/2024/01/25/DAY-3-4-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%8403/" rel="prev" title="DAY 3-4 数据结构03">
+      <i class="fa fa-chevron-left"></i> DAY 3-4 数据结构03
     </a></div>
       <div class="post-nav-item">
-    <a href="/2024/01/22/DAY-1-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%8401/" rel="next" title="DAY 1 数据结构01">
-      DAY 1 数据结构01 <i class="fa fa-chevron-right"></i>
+    <a href="/2024/01/30/DAY-7-8-%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86%E6%96%B9%E5%BC%8F%E7%9A%84%E7%9B%B8%E5%85%B3%E4%BE%8B%E9%A2%98/" rel="next" title="DAY 7-8 二叉树遍历方式的相关例题">
+      DAY 7-8 二叉树遍历方式的相关例题 <i class="fa fa-chevron-right"></i>
     </a></div>
     </div>
       </footer>
@@ -280,7 +277,7 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%881-%E8%AF%AD%E6%B3%95%E6%A8%A1%E6%9D%BF"><span class="nav-number">1.</span> <span class="nav-text">（1.语法模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%882-%E5%B8%B8%E9%87%8F%E7%9A%84%E5%AE%9A%E4%B9%89"><span class="nav-number">2.</span> <span class="nav-text">（2.常量的定义</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-%E5%AE%8F%E5%B8%B8%E9%87%8F-define"><span class="nav-number">2.1.</span> <span class="nav-text">1.宏常量 #define</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E4%BF%AE%E9%A5%B0%E7%9A%84%E5%8F%98%E9%87%8Fconst"><span class="nav-number">3.</span> <span class="nav-text">2.修饰的变量const</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%EF%BC%883-bool%E5%80%BC%EF%BC%881%E5%AD%97%E8%8A%82%EF%BC%89"><span class="nav-number">4.</span> <span class="nav-text">（3.bool值（1字节）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-true-%E4%B8%BA%E7%9C%9F%E8%A1%A8%E7%A4%BA1"><span class="nav-number">4.1.</span> <span class="nav-text">1.true 为真表示1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-false%E4%B8%BA%E5%81%87%E8%A1%A8%E7%A4%BA0"><span class="nav-number">4.2.</span> <span class="nav-text">2.false为假表示0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-%E5%8F%AA%E8%A6%81%E9%9D%9E0%E7%9A%84%E5%80%BC%E9%83%BD%E8%A1%A8%E7%A4%BA1"><span class="nav-number">4.3.</span> <span class="nav-text">3.只要非0的值都表示1</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-%E5%85%B6%E4%BB%96%E8%AF%AD%E6%B3%95%E4%BC%BC%E4%B9%8E%E5%92%8Cc%E8%AF%AD%E8%A8%80%E6%B2%A1%E6%9C%89%E4%BB%80%E4%B9%88%E5%A4%AA%E5%A4%A7%E5%8C%BA%E5%88%AB%E3%80%82"><span class="nav-number">5.</span> <span class="nav-text">(4.其他语法似乎和c语言没有什么太大区别。</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%87%AA%E7%84%B6%E6%95%B0%E7%9A%84%E6%8B%86%E5%88%86%E9%97%AE%E9%A2%98-%E6%90%9C%E7%B4%A2%E4%B8%8E%E5%9B%9E%E6%BA%AF%E7%AE%97%E6%B3%95"><span class="nav-number">1.</span> <span class="nav-text">自然数的拆分问题    (搜索与回溯算法)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E9%A2%98%E7%9B%AE%E6%8F%8F%E8%BF%B0"><span class="nav-number">1.1.</span> <span class="nav-text">题目描述</span></a></li></ol></li></ol></div>
       </div>
       <!--/noindex-->
 
